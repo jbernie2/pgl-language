@@ -1,0 +1,82 @@
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.io.*;
+
+public class codeGenerator
+{
+	HashMap<String,String> terminals;
+	HashMap<String,NTExec> nonterminals;
+	String name;
+	FileWriter fstream;
+	BufferedWriter out;
+	public codeGenerator(HashMap<String,String> t,HashMap<String,NTExec> nt,String outFile)
+	{
+		terminals = t;
+		nonterminals = nt;
+		name = formatOut(outFile);
+		try{
+			fstream = new FileWriter(name+".java");
+			out = new BufferedWriter(fstream);
+			writeHeading(name);
+			out.close();
+			
+		}catch(IOException e){
+			System.out.println("IO Error");
+		}
+	}
+	private void writeHeading(String name)
+	{
+		try{
+			out.write("import java.util.Random; \n");
+			out.write("public class "+name+"\n");
+			out.write("{\n\tRandom rand = new Random();");
+			out.write("\n\tpublic static void main(String args[])\n");
+			out.write("\t{\n");
+		
+			
+			out.write("\t}\n}");
+			
+		}catch(IOException e){
+			System.out.println("IO Error");
+		}
+	}
+	private String writefucntion(String name,NTExec productions)
+	{
+		String function;
+		LinkedList<LinkedList<production>> prodList = productions.getProductionList();
+		LinkedList<production> currentProd = prodList.getFirst();
+		
+		function += "private static void "+name+"()\n{\n";
+		function += "int randNum = rand.nextInt("+productions.totalProb+");";
+		//function += "if(randNum < "+currentProd.getValue()+") {";
+		while(currentProd.peek() != null)
+		{
+			currentProd.pop();
+			//currentProd = currentProd.pop();
+			//function += currentProd.getValue()+"();";
+		}
+		function += "}"; 
+		while(prodList.peek() != null)
+		{
+			currentProd = prodList.getFirst();
+			//function += "else if(randNum < "+currentProd.getValue()+") {";
+			while(currentProd.peek() != null)
+			{
+				currentProd = currentProd.pop();
+				//function += currentProd.getValue()+"();";
+			}
+			function += "}";
+		}
+	}
+	private String formatOut(String a)
+	{
+		int i = 0;
+		String b = "";
+		while(a.charAt(i) != '.')
+		{
+			b += a.charAt(i);
+			i++;
+		}
+		return b;
+	}
+}

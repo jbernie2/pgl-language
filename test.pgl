@@ -1,0 +1,30 @@
+define terminals
+{
+	x = "x";
+	y = "y";
+	z = "z";
+	add = "+";
+	sub = "-";
+	mul = "*";
+	div = "/";
+	lp = "(";
+	rp = ")";
+	one = "1";
+	two = "2";
+	three = "3";
+	four = "4";
+	five = "5";
+	six = "6";
+	seven = "7";
+	eight = "8";
+	nine = "9";
+	zero = "0";
+}
+define nonterminals
+{
+	Expr->term ops term (100);
+	term -> num(20) | x(10) | y (10) | z (10) | lp Expr rp (20);
+	ops -> add (1) | sub (1) | mul (1) | div (1);
+	num -> digit (10) | digit num (20);
+	digit -> one (1) | two (1) | three (1) | four (1) | five (1) | six (1) | seven (1) | eight (1) | nine (1) | zero (1);
+}

@@ -1,0 +1,12 @@
+define terminals
+{
+	a = "x";
+	b = "y";
+	c = "z";
+}
+define nonterminals
+{
+	A->B C(50) | C(10) | C B A(40);
+	B->b;
+	C->c;
+}

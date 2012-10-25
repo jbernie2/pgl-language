@@ -1,0 +1,10 @@
+import java.util.Random; 
+public class test
+{
+	Random rand = new Random();
+	public static void main(String args[])
+	{
+private static void S()
+{
+int randNum = rand.nextInt(100);if(randNum < 50) {B();C();}else if(randNum < 10) {C();}else if(randNum < 40) {C();B();S();}}}}	}
+}

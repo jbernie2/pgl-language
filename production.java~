@@ -1,0 +1,13 @@
+public class production
+{
+	String name = null;
+	int prob = 0;
+	public production(int a)
+	{
+		prob = a;
+	}
+	public production(String a)
+	{
+		name = a;
+	}
+}
