@@ -1,12 +1,13 @@
 pgl-language
 ============
-
 pgl (probabilistic grammar language) is a non-Turing-Complete language that can be used to easily make and 
 use probabilistic grammars.
 
 The program takes in a .pgl file and produces a .java file, the java file can then be compiled and run which 
 will produce a random string based on the rules specified in the .pgl file
 
+to compile the compiler
+    make
 to compile a pgl program:
     java parse test.pgl
     javac test.java
