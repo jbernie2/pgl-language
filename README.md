@@ -22,16 +22,16 @@ The current version has no error checking of any kind and will simply produce er
 an example of the language is below
 
 
-terminals{
-  a = "x";
-  b = "y";
-  c = "z";
-}
-nonterminals{
-  A -> a (30) | B C (20) | A B C (50);
-  B -> A C b (50) | b c (50);
-  C -> c(100);
-}
+    terminals{
+        a = "x";
+        b = "y";
+        c = "z";
+    }
+    nonterminals{
+        A -> a (30) | B C (20) | A B C (50);
+        B -> A C b (50) | b c (50);
+        C -> c(100);
+    }
 
 
 terminals are the strings that are produced and nonterminals are can produce any number of terminals and nonterminals
