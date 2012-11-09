@@ -21,6 +21,7 @@ The current version has no error checking of any kind and will simply produce er
 
 an example of the language is below
 
+
 terminals{
   a = "x";
   b = "y";
@@ -31,6 +32,7 @@ nonterminals{
   B -> A C b (50) | b c (50);
   C -> c(100);
 }
+
 
 terminals are the strings that are produced and nonterminals are can produce any number of terminals and nonterminals
 the number following the production (10) is the probability of that production being chosen.
