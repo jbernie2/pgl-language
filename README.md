@@ -7,13 +7,12 @@ The program takes in a .pgl file and produces a .java file, the java file can th
 will produce a random string based on the rules specified in the .pgl file
 
 to compile the compiler
-
     make
     
 to compile a pgl program:
-
     java parse test.pgl
     javac test.java
+    
 to run a pgl program
     java test
 
