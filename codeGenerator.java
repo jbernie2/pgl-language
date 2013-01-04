@@ -56,7 +56,7 @@ public class codeGenerator
 	}
 	private String writeNTFunction(String name,NTExec productions)
 	{
-		System.out.println("writeNTFucntion\n");
+		//System.out.println("writeNTFucntion\n");
 		
 		String function;
 		int currentProb = 0;
@@ -73,7 +73,7 @@ public class codeGenerator
 		boolean bracket = false;
 		while(prodList.peek() != null)
 		{	
-			System.out.println("here\n");
+			//System.out.println("here\n");
 			currentProd = prodList.removeFirst();
 			
 			int prodCounter = 0;
@@ -82,7 +82,7 @@ public class codeGenerator
 				current = currentProd.removeFirst();
 				if(prodCounter == 0 && listCounter ==0)
 				{
-					System.out.println("current.getValue() = "+current.getValue());
+					//System.out.println("current.getValue() = "+current.getValue());
 					currentProb += (Integer)current.getValue();
 					function += "if(randNum < "+currentProb+") {";
 					bracket = true;

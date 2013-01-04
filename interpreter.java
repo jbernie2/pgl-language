@@ -20,27 +20,35 @@ public class interpreter
 		terminalMap = tMap;
 		nonterminalMap = ntMap;
 		interpretNT(nonterminals.getFirst());
-		return results;
+		System.out.println();
+		//return results;
 	}
 	public void interpretNT(NTExec current)
 	{
 		if(current == null)
 			return;
 		
-		Random rand = new Random();
-		int probability = rand.nextInt(current.totalProb);
 		LinkedList<LinkedList<production>> prodList = current.getProductionList();
 		LinkedList<production> currentProdList;
 		production currentProd;
+		
+		Random rand = new Random();
+		int probability = rand.nextInt(current.totalProb);
+		int currentProb = 0;
+		
 		for(int i = 0; i < prodList.size();i++)
 		{
 			currentProdList = prodList.get(i);
-			if((Integer)currentProdList.getFirst().getValue() > probability)
+			//System.out.println("here");
+			if(currentProdList.size() == 0)
+				;
+			else if((currentProb+=(Integer)currentProdList.getFirst().getValue()) > probability)
 			{
 				i = prodList.size();//get out of the for loop
 				for(int j = 1; j < currentProdList.size(); j++)
 				{
 					String next = (String) currentProdList.get(j).getValue();
+					//System.out.println("next = "+next);	
 					interpretNT(nonterminalMap.get(next));
 					interpretT(terminalMap.get(next));
 				}
@@ -49,12 +57,13 @@ public class interpreter
 	}
 	public void interpretT(String current)
 	{
+		//System.out.println("here");
 		if(current == null)
 			return;
 		else
 		{
-			results.addLast(current);
-			//System.out.println(current);
+			//results.addLast(current);
+			System.out.print(current);
 		}
 	}
 }

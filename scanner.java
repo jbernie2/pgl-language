@@ -1,23 +1,21 @@
+/*
+* Author: John Bernier
+* Created: 10/2012
+* scanner.java:
+*		Tokenizes a .pgl file and passes the tokens to the parser in parse.java
+*/
+
 import java.io.*;
 
 public class scanner
 {
 	BufferedReader reader;
-	int line = 0;
+	int line = 1;
 	public scanner(BufferedReader reader)
 	{
 		this.reader = reader;
-		
-		//token t = getNextToken();
-		/*
-		while(t.getType().equals("EOF") == false)
-		{
-			System.out.println("t.type = "+t.type);	
-			System.out.println("t.text = "+t.text);
-			t = getNextToken();
-		}
-		*/
 	}
+	// each if/while/switch block checks for a different type of token
 	public token getNextToken()
 	{
 		char c = readNext(reader);
@@ -28,6 +26,35 @@ public class scanner
 			if(c == '\n')
 				line++;
 			c = readNext(reader);	
+		}
+	
+		if(c == '/') //checks for comment
+		{
+			char temp = c;
+			mark(reader);
+			c = readNext(reader);
+			if(c == '/')
+			{
+				c = readNext(reader);
+				while(c != '\n')
+				{
+					c = readNext(reader);
+				}
+				line++;
+			
+				while(Character.isWhitespace(c))
+				{			
+					if(c == '\n')
+						line++;	
+					c = readNext(reader);	
+				}
+			}
+			else
+			{
+				reset(reader);
+				t.setText("error: line "+line+", invalid character "+temp+c);
+				t.setType(types.ERR);
+			}
 		}
 		
 		if(c == -1 || c == 65535)//checks for eof
@@ -50,10 +77,9 @@ public class scanner
 			//checks for reserve words
 			if(!reserveWord(t))
 				t.setType(types.VAR);
-			
 				
 		}
-		else if(Character.isDigit(c))//checks if number
+		else if(Character.isDigit(c))//checks for number/production probability
 		{
 			t.setText(c);
 			mark(reader);
@@ -67,7 +93,7 @@ public class scanner
 			reset(reader);
 			t.setType(types.NUM);
 		}
-		else if(c == '\"') //checks if literal
+		else if(c == '\"') //checks for nonterminal definition 
 		{
 			//t.setText(c);
 			c = readNext(reader);
@@ -81,7 +107,7 @@ public class scanner
 			t.setType(types.LIT);
 			
 		}
-		else if(c == '\'')// checks if literal
+		else if(c == '\'')//checks for nonterminal definition
 		{
 			//t.setText(c);
 			c = readNext(reader);
@@ -184,6 +210,7 @@ public class scanner
 		return c;
 	}
 	//marks the buffer at a given position
+	//this allows a reader to be rolled back
 	private void mark(BufferedReader reader)
 	{
 		try{reader.mark(1);}

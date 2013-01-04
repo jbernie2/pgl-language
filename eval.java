@@ -14,7 +14,8 @@ public class eval
 	{
 		terminals(execTree.getLHS());
 		nonterminals(execTree.getRHS());
-		codeGenerator generator = new codeGenerator(terminalList,nonterminalList,outFile);
+		//codeGenerator generator = new codeGenerator(terminalList,nonterminalList,outFile);
+		interpreter interpret = new interpreter(terminalList,nonterminalList,terminals,nonterminals);
 	}
 	private void terminals(executionTree execTree)
 	{
@@ -46,8 +47,8 @@ public class eval
 		else 
 			return;
 		
-		System.out.println("term = "+term);
-		System.out.println("val = "+val);
+		//System.out.println("term = "+term);
+		//System.out.println("val = "+val);
 		
 		
 		if(!terminals.containsKey(term))
@@ -83,7 +84,7 @@ public class eval
 		else
 			return;
 		
-		System.out.println("nt name = "+nt);
+		//System.out.println("nt name = "+nt);
 		
 		if(!nonterminals.containsKey(nt))
 		{
@@ -121,7 +122,7 @@ public class eval
 			else
 				return;
 			
-			System.out.println("nt = "+nt);
+			//System.out.println("nt = "+nt);
 			
 			if(isInteger(nt))
 			{

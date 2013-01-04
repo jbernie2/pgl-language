@@ -1,3 +1,12 @@
+/*
+* Author: John Bernier
+* Created: 10/2012
+* parse.java:
+*		main method for the interpretter
+*		validates grammar of a .pgl file
+*		constructs the abstract syntax tree 
+*/
+
 import java.io.*;
 public class parse
 {
@@ -5,7 +14,7 @@ public class parse
 	token t;
 	public static void main(String args[])
 	{
-		FileReader input;
+		FileReader input; //.pgl file to be parsed
 		BufferedReader reader;
 		if(args.length > 0)
 		{
@@ -16,18 +25,20 @@ public class parse
 			}catch(FileNotFoundException e)
 			{
 				System.out.println("file not found");
+				return;
 			}
 		}
 		else
 		{
-			System.out.println("arguments invalid");	
+			System.out.println("arguments invalid");
+			return;
 		}
 		
 		parse p = new parse();
 		executionTree execTree = new executionTree(null,"root");
 		p.parse(execTree);
 		
-		execTree.print(0);
+		//execTree.print(0);
 		
 		eval evaluateTree = new eval(execTree,args[0]);
 	}
@@ -35,7 +46,7 @@ public class parse
 	{
 		t = scan.getNextToken();
 		
-		System.out.println("parse");
+		//System.out.println("parse");
 		if(matchType(t,types.DEFINE))
 		{
 			execTree.setLHS(null,"TERMINALS");
@@ -51,7 +62,7 @@ public class parse
 	}
 	public void define_terminals(executionTree execTree)
 	{
-		System.out.println("define_terminals");
+		//System.out.println("define_terminals");
 		if(match(t,types.DEFINE))
 		{
 			if(match(t,types.TDEF))
@@ -68,7 +79,7 @@ public class parse
 	}
 	public void terminal_definitionList(executionTree execTree)
 	{
-		System.out.println("terminal_definitionList");
+		//System.out.println("terminal_definitionList");
 		if(matchType(t,types.VAR))
 		{
 			execTree.setLHS(null,"TDEF");
@@ -82,7 +93,7 @@ public class parse
 	{
 		
 		
-		System.out.println("terminal_definition");
+		//System.out.println("terminal_definition");
 		execTree.setLHS(t.getText(),"T");
 		match(t,types.VAR);
 		match(t,types.EQ);
@@ -92,7 +103,7 @@ public class parse
 	}
 	public void define_nonterminals(executionTree execTree)
 	{
-		System.out.println("define_nonterminals");
+		//System.out.println("define_nonterminals");
 		if(match(t,types.DEFINE))
 		{
 			if(match(t,types.NTDEF))
@@ -110,7 +121,7 @@ public class parse
 	}
 	public void nonterminal_definitionList(executionTree execTree)
 	{
-		System.out.println("nonterminal_definitionList");
+		//System.out.println("nonterminal_definitionList");
 		if(matchType(t,types.VAR))
 		{
 			execTree.setLHS(null,"NTDEF");
@@ -123,7 +134,7 @@ public class parse
 	}
 	public void nonterminal_definition(executionTree execTree)
 	{
-		System.out.println("nonterminal_definition");
+		//System.out.println("nonterminal_definition");
 		
 		execTree.setLHS(t.text,"NT");
 		execTree.setRHS(null,"GENERATES");
@@ -135,7 +146,7 @@ public class parse
 	}
 	public void ntexpression(executionTree execTree)
 	{
-		System.out.println("ntexpression");
+		//System.out.println("ntexpression");
 		if(matchType(t,types.VAR))
 		{
 			execTree.setLHS(null,"PRODUCTION");
@@ -147,7 +158,7 @@ public class parse
 	}
 	public void production(executionTree execTree)
 	{
-		System.out.println("production");
+		//System.out.println("production");
 		if(matchType(t,types.VAR))
 		{
 			execTree.setLHS(t.text,"GEN");
@@ -158,7 +169,7 @@ public class parse
 	}
 	public void productionList(executionTree execTree)
 	{
-		System.out.println("productionList");
+		//System.out.println("productionList");
 		if(matchType(t,types.OR))
 		{
 			match(t,types.OR);
@@ -167,7 +178,7 @@ public class parse
 	}
 	public void productionTail(executionTree execTree)
 	{
-		System.out.println("productionTail");
+		//System.out.println("productionTail");
 		if(matchType(t,types.VAR))
 		{	
 			production(execTree);
@@ -186,7 +197,7 @@ public class parse
 	{
 		if(x.getType().equals(a))
 		{
-			System.out.println("matched "+x.text+" to "+a);
+			//System.out.println("matched "+x.text+" to "+a);
 			t = scan.getNextToken();
 			return true;
 		}

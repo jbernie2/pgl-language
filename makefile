@@ -14,7 +14,8 @@ CLASSES = \
 	types.java \
 	scanner.java \
 	parse.java \
-	test.java
+	test.java \
+	interpreter.java
 
 default: classes
 

@@ -1,5 +1,6 @@
 define terminals
 {
+	//test
 	x = "x";
 	y = "y";
 	z = "z";
@@ -22,7 +23,7 @@ define terminals
 }
 define nonterminals
 {
-	Expr->term ops term (100);
+	Expr -> term ops term (100);
 	term -> num(20) | x(10) | y (10) | z (10) | lp Expr rp (20);
 	ops -> add (1) | sub (1) | mul (1) | div (1);
 	num -> digit (10) | digit num (20);
