@@ -6,7 +6,7 @@ use probabilistic grammars.
 The program takes in a .pgl file and interprets it in java. The pgl program 
 will produce a string of characters based on the rules specified in the .pgl file
 
-to compile the compiler
+to compile the interpretter
 
     make
     
