@@ -1,3 +1,12 @@
+/*
+* Author: John Bernier
+* Created: 10/2012
+* codeGenerator.java:
+*		uses NTExec objects to generate a .java file equivalent to the .pgl file
+*		This class is not currently being used interpretation is being used instead
+*		However, this class can be activated by uncommenting it from eval.java
+*/
+
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.io.*;

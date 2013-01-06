@@ -1,3 +1,9 @@
+/*
+* Author: John Bernier
+* Created: 10/2012
+* executionTree.java:
+*		data strucure use to store the abstract syntax tree generated in parse.java
+*/
 public class executionTree
 {
 	String text;

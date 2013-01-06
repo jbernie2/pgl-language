@@ -1,11 +1,24 @@
+/*
+* Author: John Bernier
+* Created: 10/2012
+* eval.java:
+*		takes the abstract syntax tree from parse.java and constructs NTExec 
+*		objects. For explanation of NTExec objects, goto
+*		NTExec.java
+*/
+
 import java.util.HashMap;
 import java.util.LinkedList;
 
 public class eval
 {
+	//hash maps are used for interpretation of the .pgl file
 	HashMap<String,String> terminals = new HashMap<String,String>();
 	HashMap<String,NTExec> nonterminals = new HashMap<String,NTExec>();
 	
+	//Linked lists used for both interpretation and compilation
+	//but hopefully these will be eliminated soon, since compiling the
+	//.pgl file into java is no longer necessary
 	LinkedList<NTExec> nonterminalList = new LinkedList<NTExec>();
 	LinkedList<terminal> terminalList = new LinkedList<terminal>();
 	
@@ -50,7 +63,7 @@ public class eval
 		//System.out.println("term = "+term);
 		//System.out.println("val = "+val);
 		
-		
+		//avoids dupliactes in the terminal hashmap.
 		if(!terminals.containsKey(term))
 		{
 			terminals.put(term,val);
@@ -86,13 +99,13 @@ public class eval
 		
 		//System.out.println("nt name = "+nt);
 		
+		//avoiding duplicates in the nonterminal hashmap
 		if(!nonterminals.containsKey(nt))
 		{
 			prods = new NTExec();
 			prods.name = nt;
 			nonterminals.put(nt,prods);
 			nonterminalList.addLast(prods);
-			
 		}
 		else
 		{
@@ -123,7 +136,16 @@ public class eval
 				return;
 			
 			//System.out.println("nt = "+nt);
+			//calculating the sum of all the numbers used for the probabilities
+			//for the productions of a nonterminal, this allows the sum of the
+			//probabilities to be arbitrary, ie. not out of 100
 			
+			//also if a nonterminal's productions are spread over multiple statments
+			//ie
+			//	A -> B(10)
+			//	A -> C(10)
+			//they will be compiled into one list of statements under the same
+			//nonterminal name
 			if(isInteger(nt))
 			{
 				val = Integer.parseInt(nt);
@@ -136,6 +158,9 @@ public class eval
 		if(RHSnotNull(execTree))
 			productionList(prods,execTree.getRHS());
 	}
+	
+	//Helper functions, These basically are here to make the above code cleaner
+	//so that the try/catch statements dont make the code messy
 	private boolean isInteger( String input )  
     {  
        try  

@@ -35,6 +35,7 @@ public class parse
 		}
 		
 		parse p = new parse();
+		//data structure for abstract syntax tree
 		executionTree execTree = new executionTree(null,"root");
 		p.parse(execTree);
 		
