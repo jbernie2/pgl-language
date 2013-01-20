@@ -8,42 +8,36 @@
 */
 
 import java.io.*;
+import java.util.LinkedList;
+
 public class parse
 {
-	static scanner scan;
+	scanner scan;
 	token t;
-	public static void main(String args[])
+	public parse(String filename,LinkedList<String> results)
 	{
 		FileReader input; //.pgl file to be parsed
 		BufferedReader reader;
-		if(args.length > 0)
+		
+		try{
+			input = new FileReader(filename);
+			reader = new BufferedReader(input);
+			scan = new scanner(reader);
+		}catch(FileNotFoundException e)
 		{
-			try{
-				input = new FileReader(args[0]);
-				reader = new BufferedReader(input);
-				scan = new scanner(reader);
-			}catch(FileNotFoundException e)
-			{
-				System.out.println("file not found");
-				return;
-			}
-		}
-		else
-		{
-			System.out.println("arguments invalid");
+			System.out.println("file not found");
 			return;
 		}
-		
-		parse p = new parse();
+	
 		//data structure for abstract syntax tree
 		executionTree execTree = new executionTree(null,"root");
-		p.parse(execTree);
+		parseNext(execTree);
 		
 		//execTree.print(0);
 		
-		eval evaluateTree = new eval(execTree,args[0]);
+		eval evaluate = new eval(execTree,filename,results);
 	}
-	public void parse(executionTree execTree)
+	public void parseNext(executionTree execTree)
 	{
 		t = scan.getNextToken();
 		

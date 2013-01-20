@@ -14,8 +14,9 @@ CLASSES = \
 	types.java \
 	scanner.java \
 	parse.java \
-	test.java \
-	interpreter.java
+	interpreter.java \
+	pgl.java \
+	pglInterpreter.java
 
 default: classes
 

@@ -20,19 +20,19 @@ public class interpreter
 	LinkedList<String> results;
 	
 	public interpreter(LinkedList<terminal> t,LinkedList<NTExec> nt,
-					   HashMap<String,String> tMap,HashMap<String,NTExec> ntMap)
+					   HashMap<String,String> tMap,HashMap<String,NTExec> ntMap,
+					   LinkedList<String> results)
 	{
 		terminals = t;
 		nonterminals = nt;
 		terminalMap = tMap;
 		nonterminalMap = ntMap;
+		this.results = results;
 		//get first production in the list, this will be the first nonterminal
 		// in the .pgl file
 		interpretNT(nonterminals.getFirst());
-		System.out.println();
-		//return results;
 	}
-	public void interpretNT(NTExec current)
+	private void interpretNT(NTExec current)
 	{
 		if(current == null)
 			return;
@@ -87,7 +87,7 @@ public class interpreter
 			}
 		}
 	}
-	public void interpretT(String current)
+	private void interpretT(String current)
 	{
 		//System.out.println("here");
 		if(current == null)
@@ -97,10 +97,15 @@ public class interpreter
 			//currently just prints out the results, but
 			//soon this class will have the option of returning 
 			//a linked list with the results so that they can be used else where
-			
-			//results.addLast(current);
-			System.out.print(current);
+			if(results != null)
+				results.addLast(current);
+			else
+				System.out.print(current);
 		}
+	}
+	public LinkedList<String> getResults()
+	{
+		return results;	
 	}
 }
 

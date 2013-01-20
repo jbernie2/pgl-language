@@ -23,12 +23,13 @@ public class eval
 	LinkedList<terminal> terminalList = new LinkedList<terminal>();
 	
 	
-	public eval(executionTree execTree,String outFile)
+	public eval(executionTree execTree,String outFile, LinkedList<String> results)
 	{
 		terminals(execTree.getLHS());
 		nonterminals(execTree.getRHS());
 		//codeGenerator generator = new codeGenerator(terminalList,nonterminalList,outFile);
-		interpreter interpret = new interpreter(terminalList,nonterminalList,terminals,nonterminals);
+		
+		interpreter interpret = new interpreter(terminalList,nonterminalList,terminals,nonterminals,results);
 	}
 	private void terminals(executionTree execTree)
 	{
