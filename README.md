@@ -48,5 +48,7 @@ terminals are the strings that are produced and nonterminals are can produce any
 the number following the production (10) is the probability of that production being chosen.
 
 TODO LIST:
+
 add error checking to stand alone interpreter
+
 simplify and possibly combine the parse and eval classes
