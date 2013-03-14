@@ -20,7 +20,7 @@ to interpret a pgl program from within a java program and have it return a linke
     pglInterpreter pgl = new pglInterpreter();
     pgl.interpret("test.pgl",results);
     
-to interpret a pgl program from with a java file and hava it print to the command line
+to interpret a pgl program from within a java file and hava it print to the command line
 
     pglInterpreter pgl = new pglInterpreter();
     pgl.interpret("test.pgl");
