@@ -20,6 +20,6 @@ public class pgl
 			return;
 		}
 		
-		parse p = new parse(args[0],false);
+		parse p = new parse(args[0],null);
 	}
 }

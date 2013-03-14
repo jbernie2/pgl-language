@@ -12,7 +12,7 @@ to compile the interpretter
     
 to interpret a pgl program in java:
 
-    java parse test.pgl
+    java pgl test.pgl
 
 The current version has no error checking of any kind and will simply produce java runtime errors. Error checking
 capabilities are in the works.
